@@ -15,6 +15,8 @@
 import NewStudent from "./components/NewStudent";
 import Students from "./components/Students";
 import EditStudent from "./components/EditStudent";
+import axios from "axios";
+import _store from "./store.js";
 
 
 export default {
@@ -28,6 +30,9 @@ export default {
     return {
       //
     };
+  },
+  async created() {
+    _store.state.students = (await axios.get('http://localhost:3000/students')).data;
   }
 };
 </script>
