@@ -9,7 +9,8 @@
           <v-container>
             <v-layout>
               <v-flex xs12 md4>
-                <v-text-field v-model="name" label="Name" required></v-text-field>
+                <v-text-field v-model="student.firstName" label="First name" required></v-text-field>
+                <v-text-field v-model="student.lastName" label="Last name" required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -29,11 +30,11 @@ import Students from "./Students";
 export default {
   data() {
     return {
-      name: ""
+      student: ""
     };
   },
-  async created() {
-      this.name = (await axios.get(`http://localhost:3000/students?id=${this.$route.params.id}`)).data[0].name;
+  created() {
+      this.student = this.$store.getters.findStudent(this.$route.params.id)
   },
   methods: {
     async submit() {
